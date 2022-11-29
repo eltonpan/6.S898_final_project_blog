@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<div class="post">
+  <h1 id="iclr-post-title" class="post-title">{{ page.title }}</h1>
+  <span class="post-date">{{ page.date | date_to_string }} | {% for tag in page.tags %}
+    <a class="content-tag" href="/tags/#{{ tag | slugify }}"> {{ tag }} </a>
+  {% endfor %}</span>
+
+  <span id="iclr-post-authors" class="post-date">{{page.authors}}</span>
+  {{ content }}
+</div>
+
+<div id="bibtex-container" class="related">
+  For attribution in academic contexts, please cite this work as
+  <pre id="bibtex-academic-attribution">
+
+  </pre>
+
+  BibTeX citation
+  <pre id="bibtex-box">
+
+  </pre>
+</div>
+<script>
+  let authorsSpan = document.getElementById("iclr-post-authors");
+  let authorsText = authorsSpan.textContent.replace(/\(.*?\)/g, "");
+  let lnameFnameInstitution = authorsText.split(";");
+  let lfiList = lnameFnameInstitution.map(lfi => lfi.split(",").map(item => item.trim()));
+  let bibtexLFI = lfiList.map(lfi => lfi[0] + ", " + lfi[1]).join(" and ")
+  let academicLFI = lfiList.map(lfi => lfi[0]);
+  {
+    if(academicLFI.length > 2) academicLFI = academicLFI[0] + ", et al.";
+    else if(academicLFI.length == 2) academicLFI = academicLFI[0] + " & " + academicLFI[1];
+    else academicLFI = academicLFI[0];
+  }
+
+  let titleSpan = document.getElementById("iclr-post-title");
+  let titleText = titleSpan.textContent.trim();
+  let bibtexTitleShorthand = (lfiList[0][1]+
+    "2022"+
+    titleText.split(" ").slice(0, 3).join("")
+  ).replace(" ", "").replace(/[\p{P}$+<=>^`|~]/gu, '').toLowerCase().trim();
+
+  let bibtexTemplate = `
+@inproceedings{${bibtexTitleShorthand},
+  author = {${bibtexLFI}},
+  title = {${titleText}},
+  booktitle = {ICLR Blog Track},
+  year = {2022},
+  note = {${window.location.href}},
+  url  = {${window.location.href}}
+}
+  `.trim();
+  document.getElementById("bibtex-box").innerText = bibtexTemplate;
+
+  let academicTemplate = `
+${academicLFI}, "${titleText}", ICLR Blog Track, 2022.
+`.trim();
+  document.getElementById("bibtex-academic-attribution").innerText = academicTemplate;
+
+</script>
+
+
+<!---
+<script src="https://utteranc.es/client.js"
+        repo="iclr-blog-track/iclr-blog-track.github.io"
+        issue-term="pathname"
+        label="utterance"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        >
+</script>
+--->
+
+<div style="font-weight: bold; font-size: 14pt"> You will need to sign in to GitHub to add a comment! To edit or delete your comment, visit the <a href="https://github.com/iclr-blog-track/iclr-blog-track.github.io/discussions">discussions page</a> and look for your comment in the right discussion.</div>
+
+<script src="https://giscus.app/client.js"
+        data-repo="iclr-blog-track/iclr-blog-track.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzc2NjUzNDY="
+        data-category="General"
+        data-category-id="DIC_kwDOFoK3Qs4COQHd"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
