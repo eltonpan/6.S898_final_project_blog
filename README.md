@@ -1,25 +1,4 @@
-# ICLR 2022 blog track
+6.S898 Final project blog post
+Author: Elton Pan
 
-Call for blog posts: https://iclr-blog-track.github.io/
-
-About: https://iclr-blog-track.github.io/about/ 
-
-Submission guide: https://iclr-blog-track.github.io/submitting/
-
-## Track Chairs / Proposal Authors
-
-- Sebastien Bubeck, Microsoft
-- David Dobre, MILA
-- Charlie Gauthier, MILA
-- Gauthier Gidel, MILA
-- Claire Vernade, DeepMind
-
-### Copyright notice for Lanyon/Poole:
-
-#### **Mark Otto**
-- <https://github.com/mdo>
-- <https://twitter.com/mdo>
-
-#### License
-
-Open sourced under the [MIT license](LICENSE.md).
+Blog post markdown file: `_posts/2022-11-30-GPT-in-context.md`
