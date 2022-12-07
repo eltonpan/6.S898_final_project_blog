@@ -1,4 +1,4 @@
-6.S898 Final project blog post
+# 6.S898 Final project blog post
 
 Author: Elton Pan
 
