@@ -18,9 +18,6 @@ While this sounds all good, there are multiple barriers toward the adoption of L
 - LLMs (often being black boxes) are hard to explain
 - LLMs few-shot learning **performance is highly sensitive to in-context examples**
 
-
-![](https://dl.dropboxusercontent.com/s/brdn9roxytorgtb/llm_instability.png?dl=0 
- =500x)
  <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/llm_instability.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
@@ -31,7 +28,6 @@ Small variations in the LLM prompt can have a huge influence on its performance 
 >  ***What makes good in-context examples for GPT/LLM?***
 
 # What makes good in-context examples for GPT and how to find them: a k-nearest neighbor approach
-![](https://dl.dropboxusercontent.com/s/gp2gjxh4426dlfj/kate.png?dl=0)
  <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/kate.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
@@ -59,7 +55,6 @@ Our experiments show that the 1-shot performance (on a materials extraction data
 
 In Fig. 2 (left), we observe that *in-distribution* training datapoints (near the centre of grey distribution) tend to give better performance (see yellow/orange vs purple) compared to *out-of-distribution* training datapoints (at the fringe). Great! Our findings aligns with the intuition presented in the paper!
 
-![enter image description here](https://dl.dropboxusercontent.com/s/8lu9if37eyaamar/gpt-k-means.png?dl=0)
  <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/gpt-k-means.png"
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
