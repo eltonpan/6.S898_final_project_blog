@@ -21,6 +21,9 @@ While this sounds all good, there are multiple barriers toward the adoption of L
 
 ![](https://dl.dropboxusercontent.com/s/brdn9roxytorgtb/llm_instability.png?dl=0 
  =500x)
+ <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/llm_instability.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
  ***Table 1:** Results of GPT-3 on the SST-2 sentiment analysis dataset. Five different examples are randomly selected from the training set for each trial. Different contexts induce different accuracies on the test set. Source: Liu et al., 2021. What Makes Good In-Context Examples for GPT-3?. arXiv preprint arXiv:2101.06804.*
 
 Small variations in the LLM prompt can have a huge influence on its performance on a downstream task. Specifically, it has been reported that accuracies of a LLM classifier on a sentiment analysis tasks can vary drastically depending on the **choice of in-context examples** in the prompt (Table 1), hence raising the important question of:
@@ -29,6 +32,9 @@ Small variations in the LLM prompt can have a huge influence on its performance 
 
 # What makes good in-context examples for GPT and how to find them: a k-nearest neighbor approach
 ![](https://dl.dropboxusercontent.com/s/gp2gjxh4426dlfj/kate.png?dl=0)
+ <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/kate.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
 ***Figure 1:** GPT-3 in-context example selection. Blue star: test example, white points: unused training samples, grey points: randomly sampled training samples, red points: training samples selected by the k-nearest neighbors in the embedding space of an encoder. Source: Liu et al., 2021. What Makes Good In-Context Examples for GPT-3?. arXiv preprint arXiv:2101.06804.*
 
 
@@ -54,6 +60,9 @@ Our experiments show that the 1-shot performance (on a materials extraction data
 In Fig. 2 (left), we observe that *in-distribution* training datapoints (near the centre of grey distribution) tend to give better performance (see yellow/orange vs purple) compared to *out-of-distribution* training datapoints (at the fringe). Great! Our findings aligns with the intuition presented in the paper!
 
 ![enter image description here](https://dl.dropboxusercontent.com/s/8lu9if37eyaamar/gpt-k-means.png?dl=0)
+ <img src="{{ site.url }}/public/images/2022-11-30-GPT-in-context/gpt-k-means.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
 ***Figure 2:** **Left:** SVD of MatSciBERT embeddings of training  (grey) and test datapoints (colored) in materials extraction dataset.  Colored points:  Each point is a single training datapoint, with its color corresponding to GPT 1-shot F1 score on materials extraction task when conditioned on this single training datapoint  as an in-context example.  Grey points:  Test datapoints. Notice that in-distribution  training datapoints (near the centre of grey distribution) tend to give better performance (yellow/orange) compared to out-of-distribution training datapoints (at the fringe) on the materials extraction task. This offers a prior in selecting optimal in-context  examples for 1-shot learning. **Right:** 1-shot performance (metric: F1-Rouge-L  ↑)  on materials extraction task of random baseline (grey) and our approach (green) using various encoders. Here, the error bars correspond to the std of the top 3 closest examples to centroid determined by  k-means in L2 (Euclidean) space. Note that the high variance of random baseline and open-domain encoders BERT and Longformer.  Importantly, domain-specific encoders (SciBERT, MatSciBERT) gave the best performance and resulted in lower variance  in performance. Source: Pan et al. Unpublished work*
 
 Now, motivated by this finding, we present a novel k-means approach approach which aims to find the **optimal datapoint** for GPT. First, we **encode** each datapoint using an encoder. Next, we use k-means to find the **centroid** of all datapoints. Subsequently, we find the nearest datapoint to this centroid according to some similarity metric. This selected datapoint is our optimal datapoint, which is then labeled and is our **in-context example** for 1-shot learning.
