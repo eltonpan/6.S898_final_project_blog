@@ -1,4 +1,4 @@
-# 6.S898 Final project blog post
+# Code for 6.S898 Deep Learning Final Project: Blog Post
 
 Author: Elton Pan
 
